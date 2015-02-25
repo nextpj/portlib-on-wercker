@@ -1,0 +1,16 @@
+box: rioki/gcc-cpp@0.0.1
+build:
+  steps:
+    - script:
+        name: install
+        code: |
+          sudo apt-get update
+          sudo apt-get install libboost-all-dev libpoco-dev libcppunit-dev libpcre++-dev libgoogle-perftools-dev
+          ls -l /usr/lib/x86_64-linux-gnu/libpcre*
+          ls -l /usr/lib/x86_64-linux-gnu/libssl*
+    - script:
+        name: compile
+        code: |
+          autoreconf -if
+          ./configure --with-pcre_libdir=/usr/lib/x86_64-linux-gnu 
+          make
